@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>inputFilter的demo</title>
+<link rel="stylesheet" href="http://g.tbcdn.cn/kissy/k/1.3.0/css/dpl/base-min.css">
+<style type="text/css">
+h1 {
+    margin: 50px 0;
+}
+h2, h3, h4 {
+    margin: 30px 0 0 0;
+}
+input {
+    height: 30px;
+}
+.wrap {
+    width:990px;
+    margin: 0 auto;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 18px;
+}
+input {
+    width: 210px;
+    height: 24px;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+</style>
+<script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy.js" charset="utf-8"></script>
+
+</head>
+    <body>
+
+        <div class="wrap">
+
+            <h2>Demos</h2>
+            <label for="input1">只有数字</label><input type="text" id="input1" /><br />
+
+            <label for="input2">数字字母</label><input type="text" id="input2" /><br />
+
+            <label for="input3">Just default Keyboard + alert on valid Keypress</label><input type="text" id="input3" /><br />
+
+            <label for="input4">数字 + 剪切,复制,粘贴, 全选, 删除 和 Backspace</label><input type="text" id="input4" />
+
+            <label for="input5">不能输入h （暂时不太友好）</label><input type="text" id="input5" /><br />
+
+
+            <label for="input6">粘贴</label><input type="text" id="input6" /><br />
+
+        </div>
+
+        <script type="text/javascript">
+            KISSY.ready(function(S) {
+                var $ = S.all;
+                S.use('gallery/inputFilter/1.0/index',function(S,inputFilter){
+                    new inputFilter('#input1', {
+                        keydown: true, 
+                        disable: ['all'],
+                        enable: ['numbers']
+                    });
+                    new inputFilter('#input2', {
+                        keydown: true, 
+                        disable: ['all'],
+                        enable: ['numberLetters']
+                    });
+                    new inputFilter('#input3', {
+                        keydown: function(event) {
+                                alert('valid input');
+                                },
+                        disable: ['all'],
+                        enable: ['keyboard']
+                    });
+                    new inputFilter('#input4', {
+                        keydown: true,
+                        disable: ['all'],
+                        enable: ['numbers', 'basicEdits']
+                    });
+                    new inputFilter('#input5', {
+                        keydown: true,
+                        disable: ['h'], // KEYCODE OF THE "H" BUTTON
+                        strictModifiers: false, // ALSO CATCH SHIFT + "H"
+                    });
+                    new inputFilter('#input6', {
+                        keydown: true,
+                        disable: ['all'],
+                        enable: ['^86']
+                    });
+                });
+
+            });
+        </script>
+    </body>
+</html>
